@@ -13,10 +13,13 @@ while True:
 
 print("---YOUR CART---")
 
-print("You have bought: ", end="")
-print(", ".join(foods))
+if len(foods) == 0:
+    print("You have bought: Nothing!")
+else:
+    print("You have bought: ", end="")
+    print(", ".join(foods))
 
-for price in prices:
-    total += price
+    for price in prices:
+        total += price
 
-print(f"Your total is: {total: .0f}" + ",000VNĐ")
+    print(f"Your total is: {total: .0f}" + ",000VNĐ")
