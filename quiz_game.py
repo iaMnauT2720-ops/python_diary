@@ -27,11 +27,27 @@ for question in questions:
         print("Sai roi thang ngu!")
         print(f"{answers[question_num]} moi dung")
     question_num += 1
+
 print()
-print("your total score is: ", score)
-if score == 5:
+
+print("-------------------------------")
+print("            RESULT             ")
+print("-------------------------------")
+
+print("Answers: ",end=" ")
+for answer in answers:
+    print(answer, end=" ")
+print()
+print("Guesses: ",end=" ")
+for guess in guesses:
+    print(guess, end=" ")
+print()
+
+score = int(score/len(questions)*100)
+print(f"Your total score is: {score}%")
+if score >= 85:
     print("Ghe vay sao!")
-elif score < 5 and score > 0:
+elif score < 70 and score > 0:
     print("Cung binh thuong!")
 else:
     print("Ngu vlllll!")
