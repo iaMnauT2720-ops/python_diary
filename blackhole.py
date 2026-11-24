@@ -154,7 +154,6 @@ t_start = time.time()
 def update():
     t = time.time() - t_start
 
-    # Hiệu ứng xuất hiện từng lớp từ 0s -> 6s và mờ dần ở cuối (20s -> 24s)
     P["star"] = ramp(t, 0.2, 2.2) * (1.0 - ramp(t, 21.5, 23.5))
     P["hole"] = ramp(t, 2.0, 3.8) * (1.0 - ramp(t, 20.0, 22.0))
     P["disk"] = ramp(t, 3.5, 5.8) * (1.0 - ramp(t, 19.5, 21.5))
