@@ -1,8 +1,5 @@
 import numpy as np
 from scipy.ndimage import gaussian_filter as blur
-import tkinter as tk
-from PIL import Image, ImageTk
-import time
 
 W, H = 1080, 920
 CX, CY = W / 2, H / 2
@@ -137,33 +134,3 @@ def frame(t):
     sky += [.01, .015, .04]
     out = 2.2 * buf / (1 + 2.2 * buf) + sky
     return (255 * out).clip(0,255).astype(np.uint8)
-
-def ramp(t, t0, t1):
-    x = max(0.0, min(1.0, (t - t0) / (t1 - t0)))
-    return x * x * (3.0 - 2.0 * x)
-
-root = tk.Tk()
-root.title("Python — blackhole")
-root.configure(bg="black")
-
-label = tk.Label(root, bd=0)
-label.pack()
-
-t_start = time.time()
-
-def update():
-    t = time.time() - t_start
-
-    P["star"] = ramp(t, 0.2, 2.2) * (1.0 - ramp(t, 21.5, 23.5))
-    P["hole"] = ramp(t, 2.0, 3.8) * (1.0 - ramp(t, 20.0, 22.0))
-    P["disk"] = ramp(t, 3.5, 5.8) * (1.0 - ramp(t, 19.5, 21.5))
-    P["zoom"] = 0.85 + 0.15 * ramp(t, 2.0, 6.0)
-
-    img = Image.fromarray(frame(t))
-    tk_img = ImageTk.PhotoImage(img)
-    label.config(image=tk_img)
-    label.image = tk_img
-    root.after(16, update)
-
-update()
-root.mainloop()
